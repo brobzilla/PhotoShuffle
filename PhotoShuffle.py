@@ -48,11 +48,13 @@ if __name__ == '__main__':
     print 'Generating filenames.'
     for newdir in set( [ i['newpath'] for i in DATA ] ):
         files = [ r for r in DATA if r['newpath'] == newdir ]
-        pad = len( str( len(files) ) )
+        #pad = len( str( len(files) ) )
+        #Hardcode that pad to 4
+        pad = 4
         usednames = []
         for i in range( len(files) ):
-            datestr = files[i]['ftime'].strftime('%d%b%Y')
-            newname = '%0*d_%s' % (pad, i+1, datestr)
+            datestr = files[i]['ftime'].strftime('%Y%m%d_%H%M%S')
+            newname = 'IMG_%s_%0*d' % (datestr, pad, i+1)
             j = i+1
             # if filename exists keep looking until it doesn't. Ugly!
             while ( exists( joinpath( newdir, newname + files[i]['ext'] ) ) or
