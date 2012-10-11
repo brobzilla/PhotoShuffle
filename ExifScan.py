@@ -34,7 +34,7 @@ def scan_exif_data( root ):
             if exif != None:
                 row['exif'] = exif
                 data.append( row )
-    return data 
+    return data
 
 if __name__ == '__main__':
     from argparse import ArgumentParser
@@ -48,7 +48,7 @@ if __name__ == '__main__':
     GROUP.add_argument( '-nodata', action='store_true', help='No EXIF tags.' )
     ARGS = PARSER.parse_args()
 
-    print 'Scanning ' + ARGS.root 
+    print 'Scanning ' + ARGS.root
     FILES = scan_exif_data( ARGS.root )
 
     HAS_DATA = []
@@ -56,13 +56,13 @@ if __name__ == '__main__':
     for FILE in FILES:
         for TAG in ARGS.tags:
             if len( FILE['exif'] ) == 0:
-                NO_DATA.append( FILE ) 
+                NO_DATA.append( FILE )
             elif TAG in FILE['exif'].keys():
                 HAS_DATA.append( FILE )
             else:
-                NO_DATA.append( FILE ) 
+                NO_DATA.append( FILE )
 
-    print '%d files with specified tags, %d files without.' % (len(HAS_DATA), 
+    print '%d files with specified tags, %d files without.' % (len(HAS_DATA),
         len(NO_DATA))
 
     if ARGS.hasdata == True:
@@ -78,7 +78,7 @@ if __name__ == '__main__':
         del f['exif']
 
     HEADERS = ['path', 'name', 'ext' ]
-    HEADERS = HEADERS + ARGS.tags 
+    HEADERS = HEADERS + ARGS.tags
     FILE = open('report.csv', 'wb')
     WRITER = DictWriter( FILE, HEADERS, extrasaction='ignore' )
     WRITER.writeheader()
