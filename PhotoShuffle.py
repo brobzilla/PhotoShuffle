@@ -40,9 +40,9 @@ if __name__ == '__main__':
     # Remove any files without datetime info.
     DATA = [ f for f in DATA if 'ftime' in f.keys() ]
 
-    # Generate new path YYYY/MM/DD/ using EXIF date.
+    # Generate new path YYYY/MM_<Month Abbreviation>/DD/ using EXIF date.
     for r in DATA:
-        r['newpath'] = joinpath( ARGS.dest, r['ftime'].strftime('%Y/%m/%d') )
+        r['newpath'] = joinpath( ARGS.dest, r['ftime'].strftime('%Y/%m_%b/%d') )
 
     # Generate filenames per directory: 1 to n+1 (zero padded) with DDMMMYY.
     print 'Generating filenames.'
